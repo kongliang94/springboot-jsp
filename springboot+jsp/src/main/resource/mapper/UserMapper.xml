@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.spring.springboot.dao.UserDao">
+	<resultMap id="BaseResultMap" type="org.spring.springboot.domain.User">
+		<result column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="depId" property="depId" />
+	</resultMap>
+
+	<parameterMap id="user" type="org.spring.springboot.domain.User"/>
+
+	<sql id="Base_Column_List">
+		id,name,depId
+	</sql>
+
+	<select id="findUserByDepId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from user
+		where depId=#{depId}
+	</select>
+	<insert id="insert" parameterType="org.spring.springboot.domain.User">
+		insert into user(name,depId) values (#{name}, #{depId})
+	</insert>
+</mapper>
